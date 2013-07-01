@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+var fs = require('fs'),
+    solenoid = require('../'),
+    config = JSON.parse(fs.readFileSync(path.join(process.env.HOME, '.solenoidconf')));
+
+console.log('Starting application...');
+
+solenoid({
+  app: {
+    user: process.env['q_app_user'],
+    name: process.env['q_app_name'],
+    version: process.env['q_app_version']
+  },
+  storage: config.storage
+}, function (err) {
+  if (err) {
+    return console.error('Error while starting application: ' + err.message);
+  }
+
+  console.log('Application started successfully');
+});
