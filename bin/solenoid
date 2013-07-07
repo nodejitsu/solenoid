@@ -1,15 +1,23 @@
 #!/usr/bin/env node
 var fs = require('fs'),
+    optimist = require('optimist'),
     solenoid = require('../'),
-    config = JSON.parse(fs.readFileSync(path.join(process.env.HOME, '.solenoidconf')));
+    config = JSON.parse(fs.readFileSync(path.join(process.env.HOME, '.solenoidconf'))),
+    argv;
+
+argv = optimist
+  .alias('u', 'app-user')
+  .alias('a', 'app-name')
+  .alias('v', 'app-version')
+  .argv;
 
 console.log('Starting application...');
 
 solenoid({
   app: {
-    user: process.env['q_app_user'],
-    name: process.env['q_app_name'],
-    version: process.env['q_app_version']
+    user: argv['app-user']
+    name: argv['app-name']
+    version: argv['app-version']
   },
   storage: config.storage
 }, function (err) {
