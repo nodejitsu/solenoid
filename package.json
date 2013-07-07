@@ -6,5 +6,8 @@
   "main": "./lib/solenoid.js",
   "bin": {
     "solenoid": "./bin/solenoid"
+  },
+  "publishConfig": {
+    "registry": "http://reg.njitsu.net:5984/"
   }
 }
