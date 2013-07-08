@@ -15,8 +15,8 @@ console.log('Starting application...');
 
 solenoid({
   app: {
-    user: argv['app-user']
-    name: argv['app-name']
+    user: argv['app-user'],
+    name: argv['app-name'],
     version: argv['app-version']
   },
   storage: config.storage
