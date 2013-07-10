@@ -12,6 +12,11 @@ argv = optimist
   .alias('v', 'app-version')
   .argv;
 
+if (!argv['app-user'] || !argv['app-name'] || !argv['app-version']) {
+  console.error('Application name, user and version are required');
+  process.exit(1);
+}
+
 console.log('Starting application...');
 
 solenoid({
