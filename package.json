@@ -7,6 +7,12 @@
   "bin": {
     "solenoid": "./bin/solenoid"
   },
+  "dependencies": {
+    "async": "0.2.x",
+    "optimist": "0.6.x",
+    "pkgcloud": "0.8.x",
+    "useradd": "0.0.1"
+  },
   "publishConfig": {
     "registry": "http://reg.njitsu.net:5984/"
   }
