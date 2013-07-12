@@ -11,7 +11,8 @@
     "async": "0.2.x",
     "optimist": "0.6.x",
     "pkgcloud": "0.8.x",
-    "useradd": "0.0.1"
+    "useradd": "0.0.1",
+    "mkdirp": "0.3.5"
   },
   "publishConfig": {
     "registry": "http://reg.njitsu.net:5984/"
