@@ -25,7 +25,8 @@ solenoid({
     name: argv['app-name'],
     version: argv['app-version']
   },
-  storage: config.storage
+  storage: config.storage,
+  instruments: config.instruments
 }, function (err) {
   if (err) {
     return console.error('Error while starting application: ' + err.message);
