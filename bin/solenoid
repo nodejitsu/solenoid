@@ -10,27 +10,47 @@ argv = optimist
   .alias('u', 'app-user')
   .alias('a', 'app-name')
   .alias('v', 'app-version')
+  .alias('p', 'pidfile')
   .argv;
 
-if (!argv['app-user'] || !argv['app-name'] || !argv['app-version']) {
-  console.error('Application name, user and version are required');
+options = {
+  storage: config.storage,
+  instruments: config.instruments
+};
+
+action = argv._[0];
+if (['start', 'stop'].indexOf(action) === -1) {
+  console.error('Action is required and must be either "start" or "stop"');
+}
+
+if (!argv.pidfile) {
+  console.error('PID file is required');
   process.exit(1);
 }
 
-console.log('Starting application...');
+options.pidFile = argv.pidFile;
 
-solenoid({
-  app: {
+if (action === 'start') {
+  if (!argv['app-user'] || !argv['app-name'] || !argv['app-version']) {
+    console.error('Application name, user and version are required');
+    process.exit(1);
+  }
+
+  options.app = {
     user: argv['app-user'],
     name: argv['app-name'],
     version: argv['app-version']
-  },
-  storage: config.storage,
-  instruments: config.instruments
-}, function (err) {
+  };
+  console.log('Starting application...');
+}
+else {
+  console.log('Stopping application');
+}
+
+solenoid[action](options, function (err) {
   if (err) {
-    return console.error('Error while starting application: ' + err.message);
+    return console.error('Error: ' + err.message);
   }
 
-  console.log('Application started successfully');
+  console.log('Success');
 });
