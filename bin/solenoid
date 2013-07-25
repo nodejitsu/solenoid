@@ -44,7 +44,7 @@ if (action === 'start') {
   console.log('Starting application...');
 }
 else {
-  console.log('Stopping application');
+  console.log('Stopping application...');
 }
 
 solenoid[action](options, function (err) {
