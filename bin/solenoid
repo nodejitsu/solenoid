@@ -28,7 +28,7 @@ if (!argv.pidfile) {
   process.exit(1);
 }
 
-options.pidFile = argv.pidFile;
+options.pidFile = argv.pidfile;
 
 if (action === 'start') {
   if (!argv['app-user'] || !argv['app-name'] || !argv['app-version']) {
