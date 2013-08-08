@@ -16,7 +16,8 @@ argv = optimist
 options = {
   storage: config.storage,
   instruments: config.instruments,
-  engines: config.engines
+  engines: config.engines,
+  runDir: config.runDir
 };
 
 action = argv._[0];
