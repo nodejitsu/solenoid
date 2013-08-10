@@ -11,6 +11,7 @@ argv = optimist
   .alias('a', 'app-name')
   .alias('v', 'app-version')
   .alias('p', 'pidfile')
+  .alias('e', 'envfile')
   .argv;
 
 options = {
@@ -21,7 +22,7 @@ options = {
 };
 
 action = argv._[0];
-if (['start', 'stop'].indexOf(action) === -1) {
+if (['start', 'restart', 'stop'].indexOf(action) === -1) {
   console.error('Action is required and must be either "start" or "stop"');
 }
 
@@ -41,7 +42,8 @@ if (action === 'start') {
   options.app = {
     user: argv['app-user'],
     name: argv['app-name'],
-    version: argv['app-version']
+    version: argv['app-version'],
+    envFile: argv['envfile']
   };
   console.log('Starting application...');
 }
@@ -51,8 +53,9 @@ else {
 
 solenoid[action](options, function (err) {
   if (err) {
-    return console.error('Error: ' + err.message);
+    console.error('Error: ' + err.message);
+    return process.exit(1);
   }
 
-  console.log('Success');
+  console.log('Success:' + action);
 });
