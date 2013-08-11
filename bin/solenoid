@@ -9,9 +9,9 @@ var fs = require('fs'),
 argv = optimist
   .alias('u', 'app-user')
   .alias('a', 'app-name')
+  .alias('e', 'app-env')
   .alias('v', 'app-version')
   .alias('p', 'pidfile')
-  .alias('e', 'envfile')
   .argv;
 
 options = {
@@ -43,7 +43,7 @@ if (action === 'start') {
     user: argv['app-user'],
     name: argv['app-name'],
     version: argv['app-version'],
-    envFile: argv['envfile']
+    env: argv['app-env']
   };
   console.log('Starting application...');
 }
