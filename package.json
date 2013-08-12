@@ -15,7 +15,8 @@
     "mkdirp": "0.3.5",
     "semver": "2.1.x",
     "rimraf": "2.2.x",
-    "uid-number": "~0.0.3"
+    "uid-number": "~0.0.3",
+    "killer": "0.1.x"
   },
   "publishConfig": {
     "registry": "http://reg.njitsu.net:5984/"
