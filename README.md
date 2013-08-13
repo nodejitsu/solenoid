@@ -6,7 +6,7 @@ Jump start an application. `solenoid` is a binary script that does the following
 * _Stop an app:_ `solenoid stop -p PIDFILE`
 * _Restart an app:_ `solenoid restart -p PIDFILE`
 
-## Solenoid Start logic
+### Solenoid Start logic
 
 When `solenoid` starts an application it performs the following operation:
 
@@ -22,7 +22,7 @@ When `solenoid` starts an application it performs the following operation:
 10. Gets the `uid` and `gid` of the `solenoid` user
 11. Starts the application using `aeternum` and `forza`.
 
-## CLI Arguments
+### CLI Arguments
 
 ```
   -u, --app-user     Username of the owner of the application.
@@ -32,7 +32,7 @@ When `solenoid` starts an application it performs the following operation:
   -p, --pidfile      Location of the pidfile on disk of the aeternum process.
 ```
 
-## Configuration
+### Configuration
 
 `solenoid` expects a configuration file `$HOME/.solenoidconf` with the following options:
 
