@@ -62,9 +62,9 @@ When `solenoid` starts an application it performs the following operation:
   //
   "runDir": "/opt/run"
   "engines": {
-    node: {
-      default: '0.6.x',
-      path: '/opt/engines/node'
+    "node": {
+      "default": '0.6.x',
+      "path": '/opt/engines/node'
     }
   }
 }
