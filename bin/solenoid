@@ -4,6 +4,8 @@ var fs = require('fs'),
     optimist = require('optimist'),
     solenoid = require('../'),
     config = JSON.parse(fs.readFileSync(path.join(process.env.HOME, '.solenoidconf'))),
+    options,
+    action,
     argv;
 
 argv = optimist
