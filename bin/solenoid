@@ -24,6 +24,12 @@ options = {
 };
 
 action = argv._[0];
+
+if (argv.version || (argv.v && !action)) {
+  console.log(JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'))).version);
+  process.exit(0);
+}
+
 if (['start', 'restart', 'stop'].indexOf(action) === -1) {
   console.error('Action is required and must be either "start" or "stop"');
 }
