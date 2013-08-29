@@ -2,8 +2,10 @@
 var fs = require('fs'),
     path = require('path'),
     optimist = require('optimist'),
+    winston = require('winston'),
     solenoid = require('../'),
     config = JSON.parse(fs.readFileSync(path.join(process.env.HOME, '.solenoidconf'))),
+    logger,
     options,
     action,
     argv;
@@ -16,26 +18,34 @@ argv = optimist
   .alias('p', 'pidfile')
   .argv;
 
+logger = new (winston.Logger)({
+  transports: [
+    new (winston.transports.Console)(),
+    new (winston.transports.File)({ filename: '/root/solenoid.log' })
+  ]
+});
+
 options = {
   storage: config.storage,
   instruments: config.instruments,
   engines: config.engines,
-  runDir: config.runDir
+  runDir: config.runDir,
+  logger: logger
 };
 
 action = argv._[0];
 
 if (argv.version || (argv.v && !action)) {
-  console.log(JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'))).version);
+  logger.info(JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'))).version);
   process.exit(0);
 }
 
 if (['start', 'restart', 'stop'].indexOf(action) === -1) {
-  console.error('Action is required and must be either "start" or "stop"');
+  logger.error('Action is required and must be either "start" or "stop"');
 }
 
 if (!argv.pidfile) {
-  console.error('PID file is required');
+  logger.error('PID file is required');
   process.exit(1);
 }
 
@@ -43,7 +53,7 @@ options.pidFile = argv.pidfile;
 
 if (action === 'start') {
   if (!argv['app-user'] || !argv['app-name'] || !argv['app-version']) {
-    console.error('Application name, user and version are required');
+    logger.error('Application name, user and version are required');
     process.exit(1);
   }
 
@@ -53,17 +63,17 @@ if (action === 'start') {
     version: argv['app-version'],
     env: argv['app-env']
   };
-  console.log('Starting application...');
+  logger.info('Starting application...');
 }
 else {
-  console.log('Stopping application...');
+  logger.info('Stopping application...');
 }
 
 solenoid[action](options, function (err) {
   if (err) {
-    console.error('Error: ' + err.message);
+    logger.error('Error: ' + err.message);
     return process.exit(1);
   }
 
-  console.log('Success:' + action);
+  logger.info('Success:' + action);
 });
