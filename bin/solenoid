@@ -2,6 +2,7 @@
 var fs = require('fs'),
     path = require('path'),
     optimist = require('optimist'),
+    winston = require('winston'),
     solenoid = require('../'),
     config = JSON.parse(fs.readFileSync(path.join(process.env.HOME, '.solenoidconf'))),
     options,
@@ -23,6 +24,8 @@ options = {
   runDir: config.runDir
 };
 
+winston.add(winston.transports.File, { filename: '/root/solenoid.log' });
+
 action = argv._[0];
 
 if (argv.version || (argv.v && !action)) {
@@ -31,11 +34,11 @@ if (argv.version || (argv.v && !action)) {
 }
 
 if (['start', 'restart', 'stop'].indexOf(action) === -1) {
-  console.error('Action is required and must be either "start" or "stop"');
+  winston.error('Action is required and must be either "start" or "stop"');
 }
 
 if (!argv.pidfile) {
-  console.error('PID file is required');
+  winston.error('PID file is required');
   process.exit(1);
 }
 
@@ -43,7 +46,7 @@ options.pidFile = argv.pidfile;
 
 if (action === 'start') {
   if (!argv['app-user'] || !argv['app-name'] || !argv['app-version']) {
-    console.error('Application name, user and version are required');
+    winston.error('Application name, user and version are required');
     process.exit(1);
   }
 
@@ -53,17 +56,17 @@ if (action === 'start') {
     version: argv['app-version'],
     env: argv['app-env']
   };
-  console.log('Starting application...');
+  winston.info('Starting application...');
 }
 else {
-  console.log('Stopping application...');
+  winston.info('Stopping application...');
 }
 
 solenoid[action](options, function (err) {
   if (err) {
-    console.error('Error: ' + err.message);
+    winston.error('Error: ' + err.message);
     return process.exit(1);
   }
 
-  console.log('Success:' + action);
+  winston.info('Success:' + action);
 });
