@@ -1,7 +1,7 @@
 {
   "name": "solenoid",
   "decription": "Application jump starter",
-  "version": "0.4.12",
+  "version": "0.4.13",
   "author": "Nodejitsu Inc <info@nodejitsu.com>",
   "main": "./lib/solenoid.js",
   "bin": {
@@ -18,8 +18,5 @@
     "uid-number": "~0.0.3",
     "killer": "0.1.x",
     "winston": "~0.7.2"
-  },
-  "publishConfig": {
-    "registry": "http://reg.njitsu.net:5984/"
   }
 }
