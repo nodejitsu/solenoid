@@ -16,6 +16,7 @@ argv = optimist
   .alias('e', 'app-env')
   .alias('v', 'app-version')
   .alias('p', 'pidfile')
+  .alias('t', 'min-uptime')
   .argv;
 
 logger = new (winston.Logger)({
@@ -29,6 +30,7 @@ options = {
   storage: config.storage,
   instruments: config.instruments,
   engines: config.engines,
+  minUptime: argv.t || config.minUptime || 2000,
   runDir: config.runDir,
   logger: logger
 };
