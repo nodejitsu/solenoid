@@ -65,12 +65,9 @@ if (action === 'start') {
     version: argv['app-version'],
     env: argv['app-env']
   };
-  logger.info('Starting application...');
-}
-else {
-  logger.info('Stopping application...');
 }
 
+logger.info('Running ' + action + ' for app.');
 solenoid[action](options, function (err) {
   if (err) {
     logger.error('Error: ' + err.message);
