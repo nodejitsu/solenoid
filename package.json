@@ -17,5 +17,6 @@
     "uid-number": "~0.0.3",
     "killer": "0.1.x",
     "winston": "~0.7.2"
-  }
+  },
+  "license": "MIT"
 }
