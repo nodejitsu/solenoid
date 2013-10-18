@@ -19,6 +19,7 @@ argv = optimist
   .alias('m', 'min-uptime')
   .alias('r', 'retries')
   .alias('t', 'retry-timeout')
+  .alias('s', 'soft')
   .argv;
 
 logger = new (winston.Logger)({
@@ -29,14 +30,15 @@ logger = new (winston.Logger)({
 });
 
 options = {
-  storage: config.storage,
-  instruments: config.instruments,
-  engines: config.engines,
-  minUptime: argv.m || config.minUptime || 2000,
-  retries: argv.r || config.retries || 3,
+  storage:      config.storage,
+  instruments:  config.instruments,
+  engines:      config.engines,
+  minUptime:    argv.m || config.minUptime    || 2000,
+  retries:      argv.r || config.retries      || 3,
   retryTimeout: argv.t || config.retryTimeout || 500,
-  runDir: config.runDir,
-  logger: logger
+  soft:         argv.s || false
+  runDir:       config.runDir,
+  logger:       logger,
 };
 
 action = argv._[0];
