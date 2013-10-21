@@ -4,7 +4,7 @@ var fs = require('fs'),
     optimist = require('optimist'),
     winston = require('winston'),
     solenoid = require('../'),
-    config = JSON.parse(fs.readFileSync(path.join(process.env.HOME, '.solenoidconf'))),
+    config,
     logger,
     options,
     action,
@@ -19,7 +19,15 @@ argv = optimist
   .alias('m', 'min-uptime')
   .alias('r', 'retries')
   .alias('t', 'retry-timeout')
+  .alias('s', 'soft')
   .argv;
+
+action = argv._[0];
+
+if (argv.version || (argv.v && !action)) {
+  console.log(JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'))).version);
+  process.exit(0);
+}
 
 logger = new (winston.Logger)({
   transports: [
@@ -28,23 +36,18 @@ logger = new (winston.Logger)({
   ]
 });
 
+config  = JSON.parse(fs.readFileSync(path.join(process.env.HOME, '.solenoidconf')));
 options = {
-  storage: config.storage,
-  instruments: config.instruments,
-  engines: config.engines,
-  minUptime: argv.m || config.minUptime || 2000,
-  retries: argv.r || config.retries || 3,
+  storage:      config.storage,
+  instruments:  config.instruments,
+  engines:      config.engines,
+  minUptime:    argv.m || config.minUptime    || 2000,
+  retries:      argv.r || config.retries      || 3,
   retryTimeout: argv.t || config.retryTimeout || 500,
-  runDir: config.runDir,
-  logger: logger
+  soft:         argv.s || false,
+  runDir:       config.runDir,
+  logger:       logger,
 };
-
-action = argv._[0];
-
-if (argv.version || (argv.v && !action)) {
-  logger.info(JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'))).version);
-  process.exit(0);
-}
 
 if (['start', 'restart', 'stop'].indexOf(action) === -1) {
   logger.error('Action is required and must be either "start" or "stop"');
