@@ -18,7 +18,7 @@ argv = optimist
   .alias('p', 'pidfile')
   .alias('m', 'min-uptime')
   .alias('r', 'retries')
-  .alias('t', 'retry-timeout')
+  .alias('t', 'min-delay')
   .alias('s', 'soft')
   .argv;
 
@@ -42,8 +42,8 @@ options = {
   instruments:  config.instruments,
   engines:      config.engines,
   minUptime:    argv.m || config.minUptime    || 2000,
-  retries:      argv.r || config.retries      || 3,
-  retryTimeout: argv.t || config.retryTimeout || 500,
+  retries:      argv.r || config.retries      || 6,
+  minDelay:     argv.t || config.minDelay     || 1000,
   soft:         argv.s || false,
   runDir:       config.runDir,
   logger:       logger,
