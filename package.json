@@ -22,7 +22,8 @@
     "semver": "2.1.x",
     "tar-fs": "~0.3.0",
     "uid-number": "~0.0.3",
-    "winston": "~0.7.2"
+    "winston": "~0.7.2",
+    "readable-stream": "~1.0.9"
   },
   "license": "MIT"
 }
