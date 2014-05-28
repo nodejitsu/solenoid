@@ -19,7 +19,6 @@ argv = optimist
   .alias('m', 'min-uptime')
   .alias('r', 'retries')
   .alias('t', 'min-delay')
-  .alias('s', 'soft')
   .argv;
 
 action = argv._[0];
@@ -44,13 +43,12 @@ options = {
   minUptime:    argv.m || config.minUptime    || 2000,
   retries:      argv.r || config.retries      || 6,
   minDelay:     argv.t || config.minDelay     || 1000,
-  soft:         argv.s || false,
   runDir:       config.runDir,
   logger:       logger,
 };
 
-if (['start', 'restart', 'stop'].indexOf(action) === -1) {
-  logger.error('Action is required and must be either "start" or "stop"');
+if (['download', 'start', 'restart', 'stop'].indexOf(action) === -1) {
+  logger.error('Action is required and must be either "download", "start", "restart" or "stop"');
 }
 
 if (!argv.pidfile) {
@@ -60,7 +58,7 @@ if (!argv.pidfile) {
 
 options.pidFile = argv.pidfile;
 
-if (action === 'start') {
+if (action === 'download' || action === 'start') {
   if (!argv['app-user'] || !argv['app-name'] || !argv['app-version']) {
     logger.error('Application name, user and version are required');
     process.exit(1);
