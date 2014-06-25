@@ -19,6 +19,7 @@ argv = optimist
   .alias('m', 'min-uptime')
   .alias('r', 'retries')
   .alias('t', 'min-delay')
+  .alias('o', 'old-mode')
   .argv;
 
 action = argv._[0];
@@ -35,7 +36,13 @@ logger = new (winston.Logger)({
   ]
 });
 
-config  = JSON.parse(fs.readFileSync(path.join(process.env.HOME, '.solenoidconf')));
+try {
+  config  = JSON.parse(fs.readFileSync(path.join(process.env.HOME, '.solenoidconf')));
+} catch (ex) {
+  logger.error('.solenoidconf is required in $HOME directory');
+  process.exit(1);
+}
+
 options = {
   storage:      config.storage,
   instruments:  config.instruments,
@@ -45,6 +52,7 @@ options = {
   minDelay:     argv.t || config.minDelay     || 1000,
   runDir:       config.runDir,
   logger:       logger,
+  old:          argv.o || false
 };
 
 if (['download', 'start', 'restart', 'stop'].indexOf(action) === -1) {
