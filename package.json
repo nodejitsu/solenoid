@@ -14,14 +14,16 @@
   "dependencies": {
     "async": "0.2.x",
     "back": "0.1.x",
+    "killer": "0.1.x",
+    "mkdirp": "0.3.5",
     "optimist": "0.6.x",
     "pkgcloud": "0.8.x",
-    "mkdirp": "0.3.5",
-    "semver": "2.1.x",
     "rimraf": "2.2.x",
+    "semver": "2.1.x",
+    "tar-fs": "~0.3.0",
     "uid-number": "~0.0.3",
-    "killer": "0.1.x",
-    "winston": "~0.7.2"
+    "winston": "~0.7.2",
+    "readable-stream": "~1.0.9"
   },
   "license": "MIT"
 }
