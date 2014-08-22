@@ -438,7 +438,7 @@ var startApp = exports.startApp = function startApp(options, callback) {
   // Remark: we have to do custom detection of coffee-script as it needs to be
   // prepended with node (#!/usr/bin/env node is not intelligent enough)
   //
-  start = options['package.json'].scripts.start.split(' ')
+  start = options['package.json'].scripts.start.trim().split(' ')
 
   //
   // Set possible path locations where a coffee binary would live and replace
