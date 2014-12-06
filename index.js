@@ -17,7 +17,6 @@ var fs = require('fs'),
 
 function noop() {}
 
-
 //
 // Starts an application.
 //

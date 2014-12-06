@@ -28,7 +28,7 @@ When `solenoid` starts an application it performs the following operation:
   -u, --app-user     Username of the owner of the application.
   -a, --app-name     Name of the application.
   -v, --app-version  Version of the application.
-  -e, --app-env      Environment vars as serialized JSON. 
+  -e, --app-env      Environment vars as serialized JSON.
   -p, --pidfile      Location of the pidfile on disk of the aeternum process.
 ```
 
@@ -70,4 +70,5 @@ When `solenoid` starts an application it performs the following operation:
 }
 ```
 
-#### Copyright (C) Nodejitsu 2013
+##### LICENSE: MIT
+##### Authors: [Jarrett Cruger](https://github.com/jcrugzz), [Charlie Robbins](https://github.com/indexzero)

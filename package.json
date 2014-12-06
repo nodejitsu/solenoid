@@ -2,7 +2,17 @@
   "name": "solenoid",
   "decription": "Application jump starter",
   "version": "0.6.0",
-  "author": "Nodejitsu Inc <info@nodejitsu.com>",
+  "author": "Jarrett Cruger <jcrugzz@gmail.com>",
+  "contributors": [
+    {
+      "name": "Charlie Robbins",
+      "email": "charlie.robbins@gmail.com"
+    },
+    {
+      "name": "Maciej Malecki",
+      "email": "me@mmalecki.com"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/nodejitsu/solenoid.git"
@@ -11,18 +21,18 @@
     "solenoid": "./bin/solenoid"
   },
   "dependencies": {
-    "async": "0.2.x",
-    "back": "0.1.x",
+    "async": "0.9.x",
+    "back": "~0.2.0",
     "killer": "0.1.x",
-    "mkdirp": "0.3.5",
-    "optimist": "0.6.x",
+    "mkdirp": "~0.5.0",
+    "optimist": "~0.6.1",
     "pkgcloud": "0.8.x",
-    "rimraf": "2.2.x",
-    "semver": "2.1.x",
-    "tar-fs": "~0.3.0",
-    "uid-number": "~0.0.3",
-    "winston": "~0.7.2",
-    "readable-stream": "~1.0.9"
+    "readable-stream": "~1.0.9",
+    "rimraf": "~2.2.8",
+    "semver": "~4.1.0",
+    "tar-fs": "~1.4.1",
+    "uid-number": "~0.0.6",
+    "winston": "~0.8.1"
   },
   "license": "MIT"
 }
